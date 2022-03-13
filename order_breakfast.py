@@ -40,8 +40,11 @@ def intro():
     print_pause("The first is waffles with strawberries and whipped cream.")
     print_pause("The second is sweet potato pancakes with butter and syrup.")
 
-intro()
-get_order()
-print_pause("Your order will be ready shortly.")
-order_again()
-    
+#main function
+def order_breakfast():
+    intro()
+    get_order()
+    print_pause("Your order will be ready shortly.")
+    order_again()
+
+order_breakfast()   
