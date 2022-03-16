@@ -64,6 +64,10 @@ def house(creature, item, super_weapon, is_super, lives):
             print_delay("You do your best...")
             print_delay(f"but your {item} is no match for the {creature}.")
             print_delay("You have been defeated!")
+        else:
+            print_delay("You run back into the field. Luckily, "
+                        f"you don't seem to have been followed.")
+            field_choices()
     game_over()
 
 
