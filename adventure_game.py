@@ -1,6 +1,6 @@
 import time
 import adventure_extension
-
+import random
 
 # combines print and sleep()
 def print_delay(string):
@@ -29,19 +29,14 @@ def user_input():
 def game_over():
     again = input("Do you want to play again? (y/n)\n").lower()
     if again == "y":
-        play_game()
+        main()
     elif again == "n":
         print_delay("Thanks for playing! See you next time.")
     else:
         game_over()
         
 
-def play_game():
-    item = adventure_extension.item
-    creature = adventure_extension.creature
-    super_weapon = adventure_extension.super_weapon
-    lives = adventure_extension.lives
-    is_super = adventure_extension.is_super
+def play_game(item, creature, super_weapon, lives, is_super):
     intro(creature, item)
     while True:
         print_delay("Enter 1 to knock on the door of the house.")
@@ -103,6 +98,14 @@ def play_game():
             print_delay("You walk back out to the field.")
         else:
             print_delay("Invalid input")
-    
 
-play_game()
+
+def main():    
+    item = random.choice(adventure_extension.items)
+    creature = random.choice(adventure_extension.creatures)
+    super_weapon = random.choice(adventure_extension.super_weapons)
+    lives = 2
+    is_super = False
+    play_game(item, creature, super_weapon, lives, is_super)
+
+main()
