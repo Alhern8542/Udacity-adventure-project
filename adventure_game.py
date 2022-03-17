@@ -37,6 +37,13 @@ def game_over():
         game_over()
 
 
+def mistake(creature):
+    print_delay("You have pressed an invalid key")
+    print_delay("because of your mistake, you trip and fall")
+    print_delay(f"the {creature} attacks and defeats you")
+    game_over()
+
+
 def play_game(item, creature, super_weapon, lives, is_super):
     intro(creature, item)
     while True:
@@ -73,6 +80,9 @@ def play_game(item, creature, super_weapon, lives, is_super):
                 elif fight_run == "2":
                     print_delay("You run back into the field. Luckily, "
                                 f"you don't seem to have been followed.")
+                else:
+                    mistake(creature)
+                    break
             else:
                 print_delay(f"You feel a bit under-prepared for this, "
                             f"what with only having a tiny {item}.")
@@ -85,9 +95,12 @@ def play_game(item, creature, super_weapon, lives, is_super):
                     print_delay("You have been defeated!")
                     game_over()
                     break
-                else:
+                elif fight_run == "2":
                     print_delay("You run back into the field. Luckily, "
                                 f"you don't seem to have been followed.")
+                else:
+                    mistake(creature)
+                    break
         elif choice == "2":
             print_delay("You peer cautiously into the cave.")
             if is_super:
