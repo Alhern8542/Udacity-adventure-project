@@ -6,7 +6,7 @@ import random
 # combines print and sleep()
 def print_delay(string):
     print(string)
-    time.sleep(0)
+    time.sleep(2)
 
 
 # introduction to the game
