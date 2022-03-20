@@ -3,10 +3,10 @@ import adventure_extension
 import random
 
 
-# combines print and sleep()
-def print_delay(string):
+# combines print and sleep() default is 2 seconds
+def print_delay(string, delay=2):
     print(string)
-    time.sleep(2)
+    time.sleep(delay)
 
 
 # introduction to the game
