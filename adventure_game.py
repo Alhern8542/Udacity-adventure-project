@@ -38,6 +38,24 @@ def game_over():
         game_over()
 
 
+def cave(item, super_weapon, is_super):
+    print_delay("You peer cautiously into the cave.")
+    if is_super:
+        print_delay("You've been here before, and gotten all"
+                    " the good stuff.")
+        print_delay("It's just an empty cave now.")
+    else:
+        print_delay("It turns out to be only a very small cave.")
+        print_delay("Your eye catches a glint of shine "
+                    "behind a rock.")
+        print_delay(f"You have found {super_weapon}!")
+        print_delay(f"You discard your silly old {item} and take the"
+                    f" {super_weapon} with you.")
+        is_super = True
+    print_delay("You walk back out to the field.")
+    return is_super
+
+
 def play_game(item, creature, super_weapon, lives, is_super):
     intro(creature, item)
     while True:
@@ -95,20 +113,7 @@ def play_game(item, creature, super_weapon, lives, is_super):
                     else:
                         print_delay("Invalid input")
         elif choice == "2":
-            print_delay("You peer cautiously into the cave.")
-            if is_super:
-                print_delay("You've been here before, and gotten all"
-                            " the good stuff.")
-                print_delay("It's just an empty cave now.")
-            else:
-                print_delay("It turns out to be only a very small cave.")
-                print_delay("Your eye catches a glint of shine "
-                            "behind a rock.")
-                print_delay(f"You have found {super_weapon}!")
-                print_delay(f"You discard your silly old {item} and take the"
-                            f" {super_weapon} with you.")
-                is_super = True
-            print_delay("You walk back out to the field.")
+            is_super = cave(item, super_weapon, is_super)
         else:
             print_delay("Invalid input")
 
