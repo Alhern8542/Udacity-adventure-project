@@ -128,4 +128,5 @@ def main():
     is_super = False
     play_game(item, creature, super_weapon, lives, is_super)
 
+
 main()
