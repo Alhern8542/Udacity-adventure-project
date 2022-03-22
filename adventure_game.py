@@ -21,21 +21,33 @@ def intro(creature, item):
                 f"(but not very effective) {item}.")
 
 
+# test for valid input from user
+def valid_input(prompt, options):
+    while True:
+        option = input(prompt).lower()
+        if option in options:
+            return option
+        print_delay(f"Sorry, {option} is invalid. Try again!")
+
+
 def fight_run():
-    choose = input("Would you like to (1) fight or"
-                   " (2) run away?\n")
+    choose = valid_input("Would you like to (1) fight or"
+                         " (2) run away?\n", ["1", "2"])
     return choose
 
 
 def game_over():
-    again = input("Do you want to play again? (y/n)\n").lower()
+    again = valid_input("Do you want to play again? (y/n)\n", ["y", "n"])
     if again == "y":
         main()
-    elif again == "n":
+    else:
         print_delay("Thanks for playing! See you next time.")
         quit()
-    else:
-        game_over()
+
+
+def run():
+    print_delay("You run back into the field. Luckily, "
+                "you don't seem to have been followed.")
 
 
 def cave(item, super_weapon, is_super):
@@ -68,43 +80,33 @@ def house(item, creature, super_weapon, is_super, lives):
         print_delay("You have been defeated!")
         game_over()
     elif is_super:
-        while True:
-            choose = fight_run()
-            if choose == "1":
-                print_delay(f"As the {creature} moves to attack, "
-                            f"you unleash your {super_weapon}.")
-                print_delay(f"{super_weapon} shines brightly in "
-                            "your hand as you brace yourself for the"
-                            " attack.")
-                print_delay(f"But the {creature} takes one look at "
-                            "your shiny new toy and runs away!")
-                print_delay("You have rid the town "
-                            f"of the {creature}.\n"
-                            "You are victorious!")
-                game_over()
-            elif choose == "2":
-                print_delay("You run back into the field. Luckily, "
-                            f"you don't seem to have been followed.")
-                break
-            else:
-                print_delay("Invalid input")
+        choose = fight_run()
+        if choose == "1":
+            print_delay(f"As the {creature} moves to attack, "
+                        f"you unleash your {super_weapon}.")
+            print_delay(f"{super_weapon} shines brightly in "
+                        "your hand as you brace yourself for the"
+                        " attack.")
+            print_delay(f"But the {creature} takes one look at "
+                        "your shiny new toy and runs away!")
+            print_delay("You have rid the town "
+                        f"of the {creature}.\n"
+                        "You are victorious!")
+            game_over()
+        else:
+            run()
     else:
         print_delay(f"You feel a bit under-prepared for this, "
                     f"what with only having a tiny {item}.")
-        while True:
-            choose = fight_run()
-            if choose == "1":
-                print_delay("You do your best...")
-                print_delay(f"but your {item} is no match for"
-                            f" the {creature}.")
-                print_delay("You have been defeated!")
-                game_over()
-            elif choose == "2":
-                print_delay("You run back into the field. Luckily, "
-                            f"you don't seem to have been followed.")
-                break
-            else:
-                print_delay("Invalid input")
+        choose = fight_run()
+        if choose == "1":
+            print_delay("You do your best...")
+            print_delay(f"but your {item} is no match for"
+                        f" the {creature}.")
+            print_delay("You have been defeated!")
+            game_over()
+        else:
+            run()
     return lives
 
 
@@ -113,14 +115,12 @@ def play_game(item, creature, super_weapon, lives, is_super):
     while True:
         print_delay("Enter 1 to knock on the door of the house.")
         print_delay("Enter 2 to peer into the cave.")
-        choice = input("What would you like to do?\n"
-                       "(Please enter 1 or 2.)\n")
+        choice = valid_input("What would you like to do?\n"
+                             "(Please enter 1 or 2.)\n", ["1", "2"])
         if choice == "1":
             lives = house(item, creature, super_weapon, is_super, lives)
-        elif choice == "2":
-            is_super = cave(item, super_weapon, is_super)
         else:
-            print_delay("Invalid input")
+            is_super = cave(item, super_weapon, is_super)
 
 
 def main():
